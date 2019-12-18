@@ -1,0 +1,20 @@
+{% if messages %}
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+{% endif %}
+<br>
+<a href="{% url 'create' %} ">Create</a>
+<a href="{% url 'logout' %} ">Logout</a>
+{% if dogs %}
+    {% for dog in dogs %}
+        <li>
+            {{dog.name}} - {{dog.breed}} {{dog.date_of_birth}} {{dog.owner}}
+            {{ request.user.id }}
+            {% if dog.owner.id == request.user.id %}
+                <a href="{% url 'delete' dog.id %}">Remove</a>
+                <a href="{% url 'update' dog.id %}">Edit</a>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endif %}
